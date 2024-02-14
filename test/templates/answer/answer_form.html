@@ -1,0 +1,35 @@
+
+<!-- 댓글 등록 -->
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">댓글 올리기</h5>
+    <form method="post" class="my-3" action="{{ url_for('answer.create', question_id=question_id) }}">
+
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field, errors in form.errors.items() %}
+            <strong>{{ form[field].label }}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- 오류표시 End -->
+        
+        {{ form.csrf_token }}
+
+				{# Form에서 작성한 라벨 #}
+
+
+        {{ form.content.label }}
+        {{ form.content(class="form-control") }}
+
+        
+        <button type="submit" class="btn btn-primary">올리기</button>
+        
+    </form>
+</div>
+

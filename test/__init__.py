@@ -32,4 +32,12 @@ def create_app(): # 어플리케이션 팩토리
     from .views import board_views # views 폴더 밑에 main_views 가져옴
     test.register_blueprint(board_views.board)
 
+    from .views import answer_views # views 폴더 밑에 main_views 가져옴
+    test.register_blueprint(answer_views.answer)
+
+    from .filters import format_datetime
+    test.jinja_env.filters['date_time'] = format_datetime
+
+
+
     return test

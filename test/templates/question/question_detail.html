@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ans{
+    width: 80%;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+    </style>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content%}
+    <div class="container my-3">
+        <!-- 질문 -->
+        <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-light text-dark p-2">
+                        {{ question.create_date|date_time }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    {% include "answer/answer_form.html" %}
+    <h5 class="border-bottom my-3 py-2 ans">{{ question.answer_set|length }}개의 답변이 있습니다.</h5>
+    {% for answer in question.answer_set %}
+    <div class="card my-3 ans">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2">
+                    {{ answer.create_date|date_time }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endblock%}
+</body>
+</html>
