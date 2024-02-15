@@ -5,24 +5,10 @@
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문 올리기</h5>
     <form method="post" class="my-3" action="{{ url_for('board.create') }}">
-
-        <!-- 오류표시 Start -->
-        {% if form.errors %}
-        <div class="alert alert-danger" role="alert">
-            {% for field, errors in form.errors.items() %}
-            <strong>{{ form[field].label }}</strong>
-            <ul>
-                {% for error in errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endfor %}
-        </div>
-        {% endif %}
-        <!-- 오류표시 End -->
-        
+        {% include "form_errors.html" %}
         {{ form.csrf_token }}
 
+        {{ form.subject.label }}
 				{# Form에서 작성한 라벨 #}
         {{ form.subject.label }}
 
@@ -33,7 +19,10 @@
         {{ form.content.label }}
         {{ form.content(class="form-control") }}
 
-        <button type="submit" class="btn btn-primary">저장</button>
+       <br>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn float-end" style="background-color:pink;">저장</button>
+      </div>
     </form>
 </div>
 <br>

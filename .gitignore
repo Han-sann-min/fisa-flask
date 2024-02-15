@@ -1,3 +1,6 @@
 __pycache_/
 migration/
 myproject/
+
+# 설정 관련 파일
+config.py

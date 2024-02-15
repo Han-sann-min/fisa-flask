@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, url_for, g
 from ..forms import AnswerForm
 from test import db
 from  ..models import Answer
@@ -12,7 +12,7 @@ def create(question_id):
     form = AnswerForm(csrf_enabled=True)
     
     if form.validate_on_submit():
-        a = Answer(question_id=question_id, content=form.content.data, create_date=datetime.now())
+        a = Answer(user_id=g.user.id, question_id=question_id, content=form.content.data, create_date=datetime.now())
         db.session.add(a)
         db.session.commit()
         return  redirect (url_for ("board.post_detail", question_id=question_id))
